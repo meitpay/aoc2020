@@ -6,7 +6,6 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class ValidatePassPortTest {
-
     ValidatePassPort validatePassPort;
 
     @BeforeEach
@@ -16,10 +15,9 @@ public class ValidatePassPortTest {
 
     @Test
     public void dummyTest() {
-        validatePassPort.validator();
         // First answer
         assertEquals(226, 226);
         // Second answer
-        assertEquals(160, 160);
+        assertEquals(160, validatePassPort.getNumberOfValidPasswords());
     }
 }

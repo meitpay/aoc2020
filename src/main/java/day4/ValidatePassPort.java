@@ -10,6 +10,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class ValidatePassPort {
+
     private List<String> getInput() {
         Path workingDir = Paths.get("");
         String path = workingDir.toAbsolutePath().toString() + "/src/main/resources/input/day4.txt";
@@ -23,21 +24,21 @@ public class ValidatePassPort {
         return new ArrayList<>();
     }
 
-    public int validator() {
+    public int getNumberOfValidPasswords() {
         List<String> formatInput = formatInput();
 
         AtomicInteger validPasswords = new AtomicInteger();
         formatInput.forEach(element -> {
-            List<KeyValuePair> kvpList = new ArrayList<>();
+            List<Pair> pairList = new ArrayList<>();
             List<String> keyVal = Arrays.stream(element.split(" ")).collect(Collectors.toList());
             keyVal.forEach(e -> {
-                KeyValuePair kvp = new KeyValuePair();
-                List<String> pair = Arrays.stream(e.split(":")).collect(Collectors.toList());
-                kvp.setKey(pair.get(0));
-                kvp.setValue(pair.get(1));
-                kvpList.add(kvp);
+                Pair pair = new Pair();
+                List<String> stringSplitter = Arrays.stream(e.split(":")).collect(Collectors.toList());
+                pair.setKey(stringSplitter.get(0));
+                pair.setValue(stringSplitter.get(1));
+                pairList.add(pair);
             });
-            if (validatePassword(kvpList)) {
+            if (validatePassword(pairList)) {
                 validPasswords.getAndIncrement();
             }
         });
@@ -64,7 +65,7 @@ public class ValidatePassPort {
         return formatInput;
     }
 
-    private boolean validatePassword(List<KeyValuePair> kvpList) {
+    private boolean validatePassword(List<Pair> kvpList) {
         if (kvpList.size() < 7) {
             return false;
         }
@@ -72,11 +73,11 @@ public class ValidatePassPort {
         List<String> validKeys = List.of("byr", "iyr", "eyr", "hgt", "hcl", "ecl", "pid");
         String optional = "cid";
         List<String> inputKeys = new ArrayList<>();
-        for (KeyValuePair kvp : kvpList) {
-            String key = kvp.key.strip();
-            String value = kvp.value.strip();
+        for (Pair pair : kvpList) {
+            String key = pair.key.strip();
+            String value = pair.value.strip();
             if (!key.equals(optional)) {
-                inputKeys.add(kvp.key.strip());
+                inputKeys.add(pair.key.strip());
             }
 
             boolean validValue = switch (key) {
@@ -109,6 +110,7 @@ public class ValidatePassPort {
             Integer.parseInt(value);
             return true;
         } catch (NumberFormatException e) {
+            System.out.println(e.getMessage());
             return false;
         }
     }
@@ -163,11 +165,11 @@ public class ValidatePassPort {
         return year >= 1920 && year <= 2002;
     }
 
-    static class KeyValuePair {
+    static class Pair {
         String key;
         String value;
 
-        public KeyValuePair() {}
+        public Pair() {}
 
         public String getKey() {
             return key;
