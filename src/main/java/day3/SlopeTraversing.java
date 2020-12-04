@@ -13,7 +13,7 @@ public class SlopeTraversing {
 
     private List<String> getInput() {
         Path workingDir = Paths.get("");
-        String path = workingDir.toAbsolutePath().toString() + "/src/main/java/day3/input.txt";
+        String path = workingDir.toAbsolutePath().toString() + "/src/main/resources/input/day3.txt";
 
         AtomicInteger iteration = new AtomicInteger(0);
         List<String> lines = new ArrayList<>();

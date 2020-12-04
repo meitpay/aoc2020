@@ -11,7 +11,7 @@ import java.util.stream.Stream;
 public class ValidatePassword {
     private Map<String, List<String>> getInput() throws IOException {
         Path workingDir = Paths.get("");
-        String path = workingDir.toAbsolutePath().toString() +  "/src/main/java/day2/input.txt";
+        String path = workingDir.toAbsolutePath().toString() +  "/src/main/resources/input/day2.txt";
 
         Map<String, List<String>> map = new HashMap<>();
         try (Stream<String> stream = Files.lines(Paths.get(path))) {

@@ -12,7 +12,7 @@ import java.util.stream.Stream;
 public class ValidatePassPort {
     private List<String> getInput() {
         Path workingDir = Paths.get("");
-        String path = workingDir.toAbsolutePath().toString() + "/src/main/java/day4/input.txt";
+        String path = workingDir.toAbsolutePath().toString() + "/src/main/resources/input/day4.txt";
 
         try (Stream<String> stream = Files.lines(Paths.get(path))) {
             return stream.collect(Collectors.toList());
